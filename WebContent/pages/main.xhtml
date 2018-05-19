@@ -12,12 +12,17 @@ xmlns:p="http://primefaces.org/ui">
 
 <h1>Test</h1>
 
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
+				<h:outputLabel for="infix" value="infix:" />
+				<h:inputText id="infix" value="#{postfixBB.infixstring}" />
+			</h:panelGrid>
+			<h:commandButton value="toPostfix" action="#{postfixBB.toPostfix()}" update="msg" />
+			<h:messages />
 
-
-
-
-
-
+		</h:form>
+		
+		<h:outputLabel for="postfix" value="postfix: #{postfixBB.postfixstring}" />
 </ui:define>
 </ui:composition>
 </html>
