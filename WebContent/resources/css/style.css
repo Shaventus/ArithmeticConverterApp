@@ -1,0 +1,23 @@
+body
+{
+background-color: #101010;
+ color:  #fbfbfb;
+ font: Verdana;
+ font-variant: small-caps
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button,
+.button 
+{
+		position: relative;
+		display: inline-block;
+		text-shadow: 0 0 0.5px rgba(255, 255, 255, 0.25);
+		cursor: pointer;
+		text-align: center;
+		font-weight: 100;
+		font-variant: small-caps;
+	
+}
