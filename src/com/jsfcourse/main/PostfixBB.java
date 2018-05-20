@@ -169,7 +169,7 @@ public class PostfixBB implements Serializable
 					String f;
 					l = operand.pop();
 					f = operand.pop();
-					operand.push(f + " " + l + " " + prefixtable[i] + " ");
+					operand.push(l + " " + f + " " + prefixtable[i] + " ");
 					break;
 				case "sin":
 				case "cos":

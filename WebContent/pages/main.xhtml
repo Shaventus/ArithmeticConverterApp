@@ -121,6 +121,117 @@ xmlns:p="http://primefaces.org/ui">
 		</h:dataTable>
 		<h:outputLabel for="prefix" value="prefix: #{postfixBB.prefixresutlstring}" />
 		
+		<h1>Infix to prefix</h1>
+
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
+				<h:outputLabel for="infixpre" value="infix:" />
+				<h:inputText id="infixpre" value="#{prefixBB.infixstring}" />
+			</h:panelGrid>
+			<h:commandButton value="toPostfix" action="#{prefixBB.toPrefix()}" update="tableIntoPre"/>
+			<h:messages />
+
+		</h:form>
+		
+		<h:dataTable value="#{prefixBB.prefixconversionlist}" var="item"
+			cellpadding="5" border="1" cellspacing="0" id="tableIntoPre">
+ 			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Symbol" />
+				</f:facet>
+				<h:outputText value="#{item.symbol}" />
+			</h:column>
+			
+			 <h:column>
+				<f:facet name="header">
+					<h:outputText value="Stack" />
+				</f:facet>
+				<h:outputText value="#{item.stack}" />
+			</h:column>
+			
+			 <h:column>
+				<f:facet name="header">
+					<h:outputText value="Result" />
+				</f:facet>
+				<h:outputText value="#{item.result}" />
+			</h:column>
+		</h:dataTable>
+		<h:outputLabel for="infixpre" value="prefix: #{prefixBB.prefixresutlstring}" />
+		
+		<h1>Postfix to prefix</h1>
+
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
+				<h:outputLabel for="posttopre" value="infix:" />
+				<h:inputText id="posttopre" value="#{prefixBB.postfixstring}" />
+			</h:panelGrid>
+			<h:commandButton value="posttopre" action="#{prefixBB.PostfixToPrefix()}" update="tablePosttoPre"/>
+			<h:messages />
+
+		</h:form>
+		
+		<h:dataTable value="#{prefixBB.postfixconversionlist}" var="item"
+			cellpadding="5" border="1" cellspacing="0" id="tablePosttoPre">
+ 			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Symbol" />
+				</f:facet>
+				<h:outputText value="#{item.symbol}" />
+			</h:column>
+			
+			 <h:column>
+				<f:facet name="header">
+					<h:outputText value="Stack" />
+				</f:facet>
+				<h:outputText value="#{item.stack}" />
+			</h:column>
+			
+			 <h:column>
+				<f:facet name="header">
+					<h:outputText value="Result" />
+				</f:facet>
+				<h:outputText value="#{item.result}" />
+			</h:column>
+		</h:dataTable>
+		<h:outputLabel for="infixpre" value="postfix: #{prefixBB.postfixresutlstring}" />
+		
+				<h1>Prefix to infix</h1>
+
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
+				<h:outputLabel for="posttopre" value="infix:" />
+				<h:inputText id="pretoin" value="#{prefixBB.prefixstring}" />
+			</h:panelGrid>
+			<h:commandButton value="pretoin" action="#{prefixBB.toInfix()}" update="tablePretoIn"/>
+			<h:messages />
+
+		</h:form>
+		
+		<h:dataTable value="#{prefixBB.infixconversionlist}" var="item"
+			cellpadding="5" border="1" cellspacing="0" id="tablePretoIn">
+ 			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Symbol" />
+				</f:facet>
+				<h:outputText value="#{item.symbol}" />
+			</h:column>
+			
+			 <h:column>
+				<f:facet name="header">
+					<h:outputText value="Stack" />
+				</f:facet>
+				<h:outputText value="#{item.stack}" />
+			</h:column>
+			
+			 <h:column>
+				<f:facet name="header">
+					<h:outputText value="Result" />
+				</f:facet>
+				<h:outputText value="#{item.result}" />
+			</h:column>
+		</h:dataTable>
+		<h:outputLabel for="pretoin" value="infix: #{prefixBB.infixresutlstring}" />
+		
 </ui:define>
 </ui:composition>
 </html>
