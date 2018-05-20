@@ -16,11 +16,19 @@ public class PostfixBB implements Serializable
 	private static final long serialVersionUID = 1L;
 	
 	private String infixstring;
-	private String postfixstring = "";
-	private List<ConversionStep> conversionlist = new ArrayList<ConversionStep>();
+	private String postfixstring;
+	private String prefixstring;
+	
+	private String postfixresutlstring = "";
+	private String infixresutlstring = "";
+	private String prefixresutlstring = "";
+	
+	private List<ConversionStep> prefixconversionlist = new ArrayList<ConversionStep>();
+	private List<ConversionStep> postfixconversionlist = new ArrayList<ConversionStep>();
+	private List<ConversionStep> infixconversionlist = new ArrayList<ConversionStep>();
 	
 	public void toPostfix(){
-		conversionlist = new ArrayList<ConversionStep>();
+		postfixconversionlist = new ArrayList<ConversionStep>();
 		String[] infixtable = infixstring.split("\\s+");
 		String postfix = "";
 		Stack<String> stack = new Stack<String>();
@@ -76,14 +84,119 @@ public class PostfixBB implements Serializable
 				cs.setStack(stackstring);
 			}
 			cs.setResult(postfix);
-			conversionlist.add(cs);
+			postfixconversionlist.add(cs);
 		}
 		
 		while(!stack.isEmpty()) {
 			postfix += stack.pop() + " ";
 		}
 		
-		postfixstring = postfix;
+		postfixresutlstring = postfix;
+	}
+	
+	public void toInfix(){
+		infixconversionlist = new ArrayList<ConversionStep>();
+		String[] postfixtable = postfixstring.split("\\s+");
+		Stack<String> operand= new Stack<String>();
+		String infix = "";
+		ConversionStep cs = new ConversionStep();
+		for(int i = 0;i < postfixtable.length;i++) {
+			cs = new ConversionStep();
+			cs.setSymbol(postfixtable[i]);
+			switch(postfixtable[i]){
+				case "(":
+				case ")":
+				case "-":
+				case "+":
+				case "*":
+				case "/":
+				case "NEG":
+				case "^":
+					String l;
+					String f;
+					l = operand.pop();
+					f = operand.pop();
+					operand.push("( " + f + " " + postfixtable[i] + " " + l + " ) ");
+					break;
+				case "sin":
+				case "cos":
+				case "tg":
+				case "ctg":
+					break;
+				default:
+					operand.push(postfixtable[i]);
+					break;
+			}
+			
+			String stackstring = "";
+			for(int j = 0; j < operand.size();j++){
+				stackstring += operand.get(j) + ", ";
+			}
+			if(stackstring.isEmpty()){
+				cs.setStack("empty");
+			} else {
+				cs.setStack(stackstring);
+			}
+			infixconversionlist.add(cs);
+		}
+		
+		while(!operand.isEmpty()) {
+			infix += operand.pop();
+		}
+		
+		infixresutlstring = infix;
+	}
+	
+	public void toPrefix(){
+		prefixconversionlist = new ArrayList<ConversionStep>();
+		String[] prefixtable = prefixstring.split("\\s+");
+		Stack<String> operand= new Stack<String>();
+		String prefix = "";
+		ConversionStep cs = new ConversionStep();
+		for(int i = prefixtable.length - 1;i >= 0;i--) {
+			cs = new ConversionStep();
+			cs.setSymbol(prefixtable[i]);
+			switch(prefixtable[i]){
+				case "(":
+				case ")":
+				case "-":
+				case "+":
+				case "*":
+				case "/":
+				case "NEG":
+				case "^":
+					String l;
+					String f;
+					l = operand.pop();
+					f = operand.pop();
+					operand.push(f + " " + l + " " + prefixtable[i] + " ");
+					break;
+				case "sin":
+				case "cos":
+				case "tg":
+				case "ctg":
+					break;
+				default:
+					operand.push(prefixtable[i]);
+					break;
+			}
+			String stackstring = "";
+			for(int j = 0; j < operand.size();j++){
+				stackstring += operand.get(j) + ", ";
+			}
+			if(stackstring.isEmpty()){
+				cs.setStack("empty");
+			} else {
+				cs.setStack(stackstring);
+			}
+			prefixconversionlist.add(cs);
+		}
+		
+		while(!operand.isEmpty()) {
+			prefix += operand.pop();
+		}
+		
+		prefixresutlstring = prefix;
 	}
 	
 	public int prio(String s) {
@@ -117,6 +230,14 @@ public class PostfixBB implements Serializable
 		this.infixstring = infixstring;
 	}
 
+	public String getPostfixresutlstring() {
+		return postfixresutlstring;
+	}
+
+	public void setPostfixresutlstring(String postfixresutlstring) {
+		this.postfixresutlstring = postfixresutlstring;
+	}
+
 	public String getPostfixstring() {
 		return postfixstring;
 	}
@@ -125,12 +246,52 @@ public class PostfixBB implements Serializable
 		this.postfixstring = postfixstring;
 	}
 
-	public List<ConversionStep> getConversionlist() {
-		return conversionlist;
+	public String getInfixresutlstring() {
+		return infixresutlstring;
 	}
 
-	public void setConversionlist(List<ConversionStep> conversionlist) {
-		this.conversionlist = conversionlist;
+	public void setInfixresutlstring(String infixresutlstring) {
+		this.infixresutlstring = infixresutlstring;
 	}
-	
+
+	public List<ConversionStep> getPostfixconversionlist() {
+		return postfixconversionlist;
+	}
+
+	public void setPostfixconversionlist(List<ConversionStep> postfixconversionlist) {
+		this.postfixconversionlist = postfixconversionlist;
+	}
+
+	public List<ConversionStep> getInfixconversionlist() {
+		return infixconversionlist;
+	}
+
+	public void setInfixconversionlist(List<ConversionStep> infixconversionlist) {
+		this.infixconversionlist = infixconversionlist;
+	}
+
+	public String getPrefixstring() {
+		return prefixstring;
+	}
+
+	public void setPrefixstring(String prefixstring) {
+		this.prefixstring = prefixstring;
+	}
+
+	public String getPrefixresutlstring() {
+		return prefixresutlstring;
+	}
+
+	public void setPrefixresutlstring(String prefixresutlstring) {
+		this.prefixresutlstring = prefixresutlstring;
+	}
+
+	public List<ConversionStep> getPrefixconversionlist() {
+		return prefixconversionlist;
+	}
+
+	public void setPrefixconversionlist(List<ConversionStep> prefixconversionlist) {
+		this.prefixconversionlist = prefixconversionlist;
+	}
+
 }
