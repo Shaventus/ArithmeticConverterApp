@@ -17,10 +17,34 @@ xmlns:p="http://primefaces.org/ui">
 				<h:outputLabel for="infix" value="infix:" />
 				<h:inputText id="infix" value="#{postfixBB.infixstring}" />
 			</h:panelGrid>
-			<h:commandButton value="toPostfix" action="#{postfixBB.toPostfix()}" update="msg" />
+			<h:commandButton value="toPostfix" action="#{postfixBB.toPostfix()}" update="table"/>
 			<h:messages />
 
 		</h:form>
+		
+		<h:dataTable value="#{postfixBB.conversionlist}" var="item"
+			cellpadding="5" border="1" cellspacing="0">
+ 			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Symbol" />
+				</f:facet>
+				<h:outputText value="#{item.symbol}" />
+			</h:column>
+			
+			 <h:column>
+				<f:facet name="header">
+					<h:outputText value="Stack" />
+				</f:facet>
+				<h:outputText value="#{item.stack}" />
+			</h:column>
+			
+			 <h:column>
+				<f:facet name="header">
+					<h:outputText value="Result" />
+				</f:facet>
+				<h:outputText value="#{item.result}" />
+			</h:column>
+		</h:dataTable>
 		
 		<h:outputLabel for="postfix" value="postfix: #{postfixBB.postfixstring}" />
 </ui:define>
