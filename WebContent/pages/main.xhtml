@@ -10,17 +10,30 @@ xmlns:p="http://primefaces.org/ui">
 
 <ui:define name="pageContent">
 
-<h1>Infix to postfix</h1>
+<div> 
+<i class="fas fa-code" style="font-size:35px"></i>
+      <h1>Konwersja wyrażeń arytmetycznych między postaciami infiksową - prefiksową - postfiksową</h1>
+      </div>
+      
+ <div style="background:transparent !important" class="jumbotron jumbotron-fluid">
+    <div class="row">
+     <div class="col-lg-6">
+     
+     <h1>Infix to postfix</h1>
+     
+      <form action="">
+      	<h:form>
+        <div class="form-group">
+			<h:outputLabel for="infix" value="infix:" />
+			<h:inputText id="infix" value="#{postfixBB.infixstring}" class="form-control"/>
+        </div>
+       <h:commandButton class="btn btn-primary" style="font-size:20px" value="toPostfix" action="#{postfixBB.toPostfix()}" update="tableIntoPost"/>
+		<h:messages />
 
-		<h:form>
-			<h:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
-				<h:outputLabel for="infix" value="infix:" />
-				<h:inputText id="infix" value="#{postfixBB.infixstring}" />
-			</h:panelGrid>
-			<h:commandButton value="toPostfix" action="#{postfixBB.toPostfix()}" update="tableIntoPost"/>
-			<h:messages />
+          </h:form>
+        </form>	
 
-		</h:form>
+		<hr></hr>
 		
 		<h:dataTable value="#{postfixBB.postfixconversionlist}" var="item"
 			cellpadding="5" border="1" cellspacing="0" id="tableIntoPost">
@@ -45,19 +58,27 @@ xmlns:p="http://primefaces.org/ui">
 				<h:outputText value="#{item.result}" />
 			</h:column>
 		</h:dataTable>
-		<h:outputLabel for="postfix" value="postfix: #{postfixBB.postfixresutlstring}" />
+		<hr></hr>
+		<h3><h:outputLabel for="postfix" value="postfix: #{postfixBB.postfixresutlstring}" /></h3>
+     
+     </div>
+     
+        <div class="col-lg-6">
+        
+        	<h1>Postfix to infix</h1>
+        	
+        	 <form action="">
+      	<h:form>
+        <div class="form-group">
+			<h:outputLabel for="postfix" value="postfix:" />
+				<h:inputText id="postfix" value="#{postfixBB.postfixstring}" class="form-control" />
+        </div>
+<h:commandButton class="btn btn-primary" style="font-size:20px" value="toPostfix" action="#{postfixBB.toInfix()}" update="tablePosttoIn"/>
+		<h:messages />
+        	</h:form>
+        	</form>
 		
-		<h1>Postfix to infix</h1>
-
-		<h:form>
-			<h:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
-				<h:outputLabel for="infix" value="infix:" />
-				<h:inputText id="infix" value="#{postfixBB.postfixstring}" />
-			</h:panelGrid>
-			<h:commandButton value="toPostfix" action="#{postfixBB.toInfix()}" update="tablePosttoIn"/>
-			<h:messages />
-
-		</h:form>
+		<hr></hr>
 		
 		<h:dataTable value="#{postfixBB.infixconversionlist}" var="item"
 			cellpadding="5" border="1" cellspacing="0" id="tablePosttoIn">
@@ -82,20 +103,29 @@ xmlns:p="http://primefaces.org/ui">
 				<h:outputText value="#{item.result}" />
 			</h:column>
 		</h:dataTable>
-		<h:outputLabel for="infix" value="infix: #{postfixBB.infixresutlstring}" />
+		<hr></hr>
+		<h3><h:outputLabel for="infix" value="infix: #{postfixBB.infixresutlstring}" /></h3>
+		  
+     </div>
+     </div>
+     
+    <div class="row">
+        <div class="col-lg-6">
+        
+        	<h1>Prefix to Postfix</h1>
+        	
+        		 <form action="">
+      	<h:form>
+        <div class="form-group">
+			<h:outputLabel for="prefix" value="prefix:" />
+			<h:inputText id="prefix" value="#{postfixBB.prefixstring}"  class="form-control" />
+        </div>
+<h:commandButton class="btn btn-primary" style="font-size:20px" value="toPrefix" action="#{postfixBB.toPrefix()}" update="tablePretoPost"/>
+		<h:messages />
+        	</h:form>
+        	</form>
 		
-		<h1>Prefix to Postfix</h1>
-
-		<h:form>
-			<h:panelGrid columns="2" cellpadding="5" styleClass="bottom-space">
-				<h:outputLabel for="prefix" value="prefix:" />
-				<h:inputText id="prefix" value="#{postfixBB.prefixstring}" />
-			</h:panelGrid>
-			<h:commandButton value="toPrefix" action="#{postfixBB.toPrefix()}" update="tablePretoPost"/>
-			<h:messages />
-
-		</h:form>
-		
+		<hr></hr>
 		<h:dataTable value="#{postfixBB.prefixconversionlist}" var="item"
 			cellpadding="5" border="1" cellspacing="0" id="tablePretoPost">
  			<h:column>
@@ -119,7 +149,12 @@ xmlns:p="http://primefaces.org/ui">
 				<h:outputText value="#{item.result}" />
 			</h:column>
 		</h:dataTable>
-		<h:outputLabel for="prefix" value="prefix: #{postfixBB.prefixresutlstring}" />
+		<hr></hr>
+		<h3><h:outputLabel for="prefix" value="prefix: #{postfixBB.prefixresutlstring}" /></h3>
+        
+     </div>
+     </div>
+     </div>
 		
 		<h1>Infix to prefix</h1>
 

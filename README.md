@@ -9,3 +9,4 @@ CSS;
 Libraries: Bootstrap v4.0, Font Awesome icons v5.0;
 
 Main functionalities:
+1. Conversion of arithmetic expressions between characters: infix - prefix - postfix
