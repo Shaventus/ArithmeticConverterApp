@@ -29,6 +29,7 @@ public class PrefixBB implements Serializable
 	
 	public void toPrefix(){
 		prefixconversionlist = new ArrayList<ConversionStep>();
+		prefixresutlstring = "";
 		String prefix = "";
 		Stack<String> stack = new Stack<String>();
 		StringBuilder sb = new StringBuilder();
@@ -76,7 +77,6 @@ public class PrefixBB implements Serializable
 					prefix = infixtable[i] + " " + prefix;
 					break;
 			}
-			
 			String stackstring = "";
 			for(int j = 0; j < stack.size();j++){
 				stackstring += stack.get(j) + ", ";
@@ -86,6 +86,7 @@ public class PrefixBB implements Serializable
 			} else {
 				cs.setStack(stackstring);
 			}
+			cs.setResult(prefix);
 			prefixconversionlist.add(cs);
 		}
 		
@@ -98,6 +99,7 @@ public class PrefixBB implements Serializable
 	
 	public void toInfix(){
 		infixconversionlist = new ArrayList<ConversionStep>();
+		infixresutlstring = "";
 		String[] prefixtable = prefixstring.split("\\s+");
 		Stack<String> operand= new Stack<String>();
 		String infix = "";
@@ -151,6 +153,7 @@ public class PrefixBB implements Serializable
 	
 	public void PostfixToPrefix(){
 		postfixconversionlist = new ArrayList<ConversionStep>();
+		postfixresutlstring = "";
 		String[] postixtable = postfixstring.split("\\s+");
 		Stack<String> operand= new Stack<String>();
 		String prefix = "";
@@ -167,11 +170,19 @@ public class PrefixBB implements Serializable
 				case "/":
 				case "NEG":
 				case "^":
-					String l;
-					String f;
-					l = operand.pop();
-					f = operand.pop();
-					operand.push(postixtable[i] + " " + f + " " + l + " ");
+					if(!operand.isEmpty()){
+						String l = "";
+						String f = "";
+						l = operand.pop();
+						if(!operand.isEmpty()){
+							f = operand.pop();
+						} else {
+							postfixresutlstring = "Bad value";
+						}
+						operand.push(postixtable[i] + " " + f + " " + l + " ");
+					} else {
+						postfixresutlstring = "Bad value";
+					}
 					break;
 				case "sin":
 				case "cos":
@@ -199,6 +210,7 @@ public class PrefixBB implements Serializable
 		}
 		
 		postfixresutlstring = prefix;
+		
 	}
 	
 	public int prio(String s) {
